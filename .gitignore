@@ -1,0 +1,18 @@
+# Build directories
+build/
+bin/
+dist/
+out/
+
+# Visual Studio / MSBuild
+.vs/
+*.user
+*.suo
+*.VC.db
+*.opendb
+x64/
+Debug/
+Release/
+
+# Runtime logs & captured calibration cache
+*.log
