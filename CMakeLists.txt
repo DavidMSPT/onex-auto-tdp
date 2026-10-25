@@ -8,10 +8,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build static minhook" FORCE)
 add_subdirectory(vendor/minhook)
 
-# Add version.dll proxy target
+# Add version.dll proxy target (uses pragma comment linker export forwarding in dllmain.cpp)
 add_library(version SHARED
     src/dllmain.cpp
-    version.def
 )
 
 target_include_directories(version PRIVATE
@@ -24,13 +23,6 @@ target_link_libraries(version PRIVATE
     pdh
     dbghelp
 )
-
-# Set Windows link flags
-if(MSVC)
-    target_link_options(version PRIVATE 
-        "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/version.def"
-    )
-endif()
 
 # Set output name to version.dll (no lib prefix)
 set_target_properties(version PROPERTIES
